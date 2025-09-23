@@ -115,12 +115,16 @@ export class Random implements INodeType {
 					// Create output data
 					const executionData: INodeExecutionData = {
 						json: {
-							randomNumber,
-							min,
-							max,
-							source: 'Random.org',
-							timestamp: new Date().toISOString(),
-							apiUrl: randomOrgUrl,
+							// Resultado principal (destaque)
+							result: randomNumber,
+
+							// Informações de contexto
+							min: min,
+							max: max,
+							timestamp: new Date().toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ' UTC'),
+
+							// Fonte
+							poweredBy: 'RANDOM.ORG',
 						},
 						pairedItem: {
 							item: i,
