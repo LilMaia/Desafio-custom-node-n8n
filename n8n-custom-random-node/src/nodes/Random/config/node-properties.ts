@@ -12,7 +12,7 @@ export const nodeProperties: INodeProperties[] = [
 		noDataExpression: true,
 		options: [
 			{
-				name: 'Gerador de Números Verdadeiramente Aleatórios',
+				name: 'True Random Number Generator',
 				value: OPERATIONS.GENERATE_NUMBER,
 				description: 'Gera um número verdadeiramente aleatório usando Random.org',
 				action: 'Gerar um número verdadeiramente aleatório',

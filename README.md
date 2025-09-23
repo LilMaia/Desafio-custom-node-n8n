@@ -1,303 +1,289 @@
-# n8n Custom Random Node
+# 🎲 Desafio Custom Node n8n - Random Number Generator
 
-Um conector personalizado para n8n que gera números verdadeiramente aleatórios usando a API do Random.org.
+Este projeto implementa um conector personalizado para n8n que gera números verdadeiramente aleatórios usando a API do Random.org.
 
-## 🎯 Características
+## 📋 Descrição do Projeto
 
-- **Geração de números verdadeiramente aleatórios** usando Random.org
-- **Operação simples**: "True Random Number Generator"
-- **Parâmetros configuráveis**: Valores mínimo e máximo
-- **Validação robusta** de entrada
-- **Tratamento de erros** abrangente
-- **Interface amigável** com descrições claras
+Um conector customizado do n8n que recebe inputs de mínimo e máximo (números inteiros, ambos inclusivos) e retorna um número aleatório verdadeiramente randômico usando a API do Random.org.
 
-## 📋 Pré-requisitos
+## 🎯 Funcionalidades
 
-- **Node.js 22 (LTS)** ou superior ([Download aqui](https://nodejs.org/))
-- **Docker Desktop** ([Download aqui](https://www.docker.com/products/docker-desktop/))
-  - Windows: Docker Desktop for Windows
-  - Mac: Docker Desktop for Mac  
-  - Linux: Docker Engine + Docker Compose
-- **npm** ou **yarn** (incluído com Node.js)
+- **Conector Random**: Nó personalizado para n8n
+- **Operação**: "True Random Number Generator"
+- **Inputs**: Min e Max (apenas números)
+- **API**: Random.org (https://www.random.org/integers/)
+- **Interface**: Nomes amigáveis e descrições claras
+- **Ícone**: SVG personalizado incluído
+
+## 🛠️ Pré-requisitos
+
+- **Node.js 22 (LTS)** + **TypeScript**
+- **Docker** e **Docker Compose**
+- **Git**
 
 ## 🚀 Instalação e Configuração
 
-### 0. Instalar Dependências
-
-#### Node.js
-1. Acesse https://nodejs.org/
-2. Baixe e instale a versão LTS (recomendada)
-3. Verifique a instalação: `node --version`
-
-#### Docker Desktop
-1. Acesse https://www.docker.com/products/docker-desktop/
-2. Baixe a versão para seu sistema operacional
-3. Instale e inicie o Docker Desktop
-4. Verifique a instalação: `docker --version`
-
-### 1. Clone o repositório
-
+### 1. Clone o Repositório
 ```bash
-git clone https://github.com/your-username/n8n-custom-random-node.git
-cd n8n-custom-random-node
+git clone <url-do-repositorio>
+cd "Desafio custom node n8n"
 ```
 
-### 2. Configure o ambiente
-
+### 2. Configure as Variáveis de Ambiente
 ```bash
-# Copie o arquivo de exemplo de variáveis de ambiente
+# Copie o arquivo de exemplo
 cp .env.example .env
 
-# Edite o arquivo .env conforme necessário
+# Edite as variáveis conforme necessário
+# As configurações padrão já funcionam para desenvolvimento local
 ```
 
-### 3. Instale as dependências do custom node
-
+### 3. Instale as Dependências do Custom Node
 ```bash
 cd n8n-custom-random-node
 npm install
 ```
 
-### 4. Compile o custom node
-
+### 4. Build do Custom Node
 ```bash
 npm run build
 ```
 
-### 5. Inicie a infraestrutura com Docker
+## 🐳 Executando com Docker
 
-> **Nota**: Se você estiver no Windows, certifique-se de que o Docker Desktop está executando.
-
+### 1. Inicie os Serviços
 ```bash
-# Volte para o diretório raiz
-cd ..
-
-# Inicie os serviços (use 'docker compose' em versões mais novas do Docker)
+# Na raiz do projeto
 docker-compose up -d
-
-# OU se você tem Docker Compose V2:
-docker compose up -d
 ```
 
-### 6. Acesse o n8n
-
-Abra seu navegador e acesse: http://localhost:5678
-
-**Credenciais padrão:**
-- Usuário: `admin`
-- Senha: `admin123`
-
-## 🛠️ Desenvolvimento
-
-### Estrutura do Projeto
-
-```
-.
-├── docker-compose.yml          # Configuração do Docker
-├── .env.example               # Exemplo de variáveis de ambiente
-├── n8n-custom-random-node/    # Pacote do custom node
-│   ├── src/
-│   │   ├── nodes/
-│   │   │   └── Random/
-│   │   │       └── Random.node.ts  # Implementação principal
-│   │   └── index.ts           # Ponto de entrada
-│   ├── resources/
-│   │   └── random.svg         # Ícone do node
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── gulpfile.js
-└── README.md
-```
-
-### Scripts Disponíveis
-
-```bash
-# Compilar o projeto
-npm run build
-
-# Modo de desenvolvimento (watch)
-npm run dev
-
-# Linting
-npm run lint
-
-# Correção automática de lint
-npm run lintfix
-
-# Formatação de código
-npm run format
-```
-
-### Modificando o Custom Node
-
-1. **Edite o código fonte** em `src/nodes/Random/Random.node.ts`
-2. **Recompile** com `npm run build`
-3. **Reinicie o container** do n8n: `docker-compose restart n8n`
-
-## 🔧 Configuração do n8n
-
-### Variáveis de Ambiente Importantes
-
-| Variável | Descrição | Valor Padrão |
-|----------|-----------|--------------|
-| `N8N_BASIC_AUTH_USER` | Usuário de acesso | `admin` |
-| `N8N_BASIC_AUTH_PASSWORD` | Senha de acesso | `admin123` |
-| `N8N_CUSTOM_EXTENSIONS` | Caminho para nodes customizados | `/home/node/.n8n/custom` |
-| `DB_POSTGRESDB_HOST` | Host do PostgreSQL | `postgres` |
-| `DB_POSTGRESDB_DATABASE` | Nome do banco | `n8n` |
-
-### Volumes Docker
-
-- **n8n_data**: Dados persistentes do n8n
-- **postgres_data**: Dados do banco PostgreSQL
-- **Custom nodes**: Mapeamento direto da pasta do projeto
-
-## 📖 Como Usar o Node Random
-
-### 1. Criar um Workflow
-
-1. Acesse o n8n em http://localhost:5678
-2. Crie um novo workflow
-3. Adicione o node "Random" da seção "Utility"
-
-### 2. Configurar o Node
-
-- **Operation**: "True Random Number Generator"
-- **Minimum Value**: Valor mínimo (ex: 1)
-- **Maximum Value**: Valor máximo (ex: 100)
-
-### 3. Executar
-
-O node retornará um objeto JSON com:
-
-```json
-{
-  "randomNumber": 42,
-  "min": 1,
-  "max": 100,
-  "source": "Random.org",
-  "timestamp": "2025-09-22T10:30:00.000Z",
-  "apiUrl": "https://www.random.org/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new"
-}
-```
-
-## 🔍 Solução de Problemas
-
-### O node não aparece no n8n
-
-1. Verifique se o build foi executado: `npm run build`
-2. Confirme que o volume está mapeado corretamente no docker-compose.yml
-3. Reinicie o container: `docker-compose restart n8n`
-4. Verifique os logs: `docker-compose logs n8n`
-
-### Erro de compilação TypeScript
-
-1. Verifique se o n8n-workflow está instalado: `npm install`
-2. Execute o build: `npm run build`
-3. Verifique se não há erros de sintaxe
-
-### Erro de conexão com Random.org
-
-1. Verifique sua conexão com a internet
-2. Confirme se a API do Random.org está acessível
-3. Verifique os logs do node para mais detalhes
-
-### Problemas com PostgreSQL
-
-1. Verifique se a porta 5432 não está em uso
-2. Confirme que o container postgres está executando: `docker-compose ps`
-3. Verifique os logs: `docker-compose logs postgres`
-
-## 🧪 Testando
-
-### Testar a Compilação
-
-```bash
-cd n8n-custom-random-node
-npm run build
-```
-
-### Testar o Lint
-
-```bash
-npm run lint
-```
-
-### Testar no n8n
-
-1. Inicie a infraestrutura: `docker-compose up -d`
-2. Acesse http://localhost:5678
-3. Crie um workflow simples com o node Random
-4. Execute o workflow
-
-## 📊 Monitoramento
-
-### Logs do n8n
-
-```bash
-docker-compose logs -f n8n
-```
-
-### Logs do PostgreSQL
-
-```bash
-docker-compose logs -f postgres
-```
-
-### Status dos serviços
-
+### 2. Verifique se os Serviços Estão Rodando
 ```bash
 docker-compose ps
 ```
 
+### 3. Acesse o n8n
+- **URL**: http://localhost:5678
+- **Usuário**: admin
+- **Senha**: admin123
+
+## 📦 Estrutura do Projeto
+
+```
+📁 Desafio custom node n8n/
+├── 📄 docker-compose.yml          # Configuração Docker (n8n + PostgreSQL)
+├── 📄 .env.example               # Variáveis de ambiente de exemplo
+├── 📄 setup.ps1                 # Script de setup para Windows
+├── 📄 setup.sh                  # Script de setup para Linux/Mac
+└── 📁 n8n-custom-random-node/   # Código do custom node
+    ├── 📄 package.json          # Dependências e scripts npm
+    ├── 📄 tsconfig.json         # Configuração TypeScript
+    ├── 📄 gulpfile.js           # Build do ícone SVG
+    ├── 📁 resources/            # Recursos (ícones)
+    ├── 📁 src/                  # Código fonte
+    └── 📁 dist/                 # Código compilado (gerado)
+```
+
+## 🔧 Desenvolvimento
+
+### Scripts Disponíveis
+
+```bash
+# Instalar dependências
+npm install
+
+# Build do projeto
+npm run build
+
+# Desenvolvimento com watch
+npm run dev
+
+# Linting
+npm run lint
+npm run lint:fix
+
+# Limpar build
+npm run clean
+```
+
+### Estrutura do Custom Node
+
+```
+📁 src/nodes/Random/
+├── 📄 Random.node.ts                    # Classe principal do nó
+├── 📁 config/                          # Configurações
+│   ├── 📄 constants.ts                 # Constantes e limites
+│   ├── 📄 node-description.ts          # Descrição do nó
+│   └── 📄 node-properties.ts           # Propriedades dos campos
+├── 📁 operations/                      # Lógica de operações
+│   └── 📄 RandomOperation.ts           # Operação do Random.org
+├── 📁 services/                        # Serviços auxiliares
+│   └── 📄 ParameterService.ts          # Extração de parâmetros
+└── 📁 executors/                       # Executores
+    └── 📄 SimpleExecutor.ts            # Executor principal
+```
+
+## 🧪 Testando o Custom Node
+
+### 1. Certifique-se que o n8n está rodando
+```bash
+docker-compose up -d
+curl http://localhost:5678/healthz
+```
+
+### 2. Acesse a Interface
+- Abra http://localhost:5678
+- Faça login com admin/admin123
+
+### 3. Crie um Workflow
+1. Clique em "Add first step"
+2. Procure por "Random" 
+3. Selecione o nó "Random"
+4. Configure:
+   - **Operação**: True Random Number Generator
+   - **Min**: Valor mínimo (ex: 1)
+   - **Max**: Valor máximo (ex: 100)
+5. Execute o workflow
+
+### 4. Resultado Esperado
+```json
+{
+  "result": 42,
+  "min": 1,
+  "max": 100,
+  "timestamp": "2025-09-23 14:30:45 UTC",
+  "source": "Random.org API"
+}
+```
+
+## 🌐 API Random.org
+
+O custom node utiliza a API oficial do Random.org:
+
+- **Endpoint**: `https://www.random.org/integers/`
+- **Parâmetros**: `?num=1&min={min}&max={max}&col=1&base=10&format=plain&rnd=new`
+- **Método**: GET
+- **Resposta**: Número inteiro em texto plano
+
+### Limites da API
+- **Mínimo**: -1.000.000.000
+- **Máximo**: 1.000.000.000
+
+## 📊 Banco de Dados
+
+O projeto usa PostgreSQL para armazenar dados do n8n:
+
+- **Host**: localhost:5432
+- **Database**: n8n
+- **User**: n8n
+- **Password**: n8n
+
+### Persistência
+Os dados são persistidos em volumes Docker:
+- `postgres_data`: Dados do PostgreSQL
+- `n8n_data`: Dados do n8n
+
 ## 🔒 Segurança
 
-### Produção
+### Autenticação n8n
+- **Usuário**: admin
+- **Senha**: admin123 (altere em produção)
 
-Para uso em produção, altere:
+### Variáveis de Ambiente Sensíveis
+```bash
+# .env
+N8N_BASIC_AUTH_USER=admin
+N8N_BASIC_AUTH_PASSWORD=admin123
+POSTGRES_PASSWORD=n8n
+```
 
-1. **Credenciais do banco**:
-   ```bash
-   POSTGRES_PASSWORD=your_secure_password
-   DB_POSTGRESDB_PASSWORD=your_secure_password
-   ```
+## 🛠️ Troubleshooting
 
-2. **Credenciais de acesso**:
-   ```bash
-   N8N_BASIC_AUTH_USER=your_username
-   N8N_BASIC_AUTH_PASSWORD=your_secure_password
-   ```
+### Problemas Comuns
 
-3. **Configure HTTPS** e certificados SSL
+#### 1. Custom Node não aparece no n8n
+```bash
+# Verifique se o build foi feito
+cd n8n-custom-random-node && npm run build
 
-## 🤝 Contribuindo
+# Verifique se o volume está montado corretamente
+docker-compose logs n8n
+```
+
+#### 2. Erro de conexão com Random.org
+- Verifique conexão com internet
+- Confirme se os limites de min/max estão corretos
+
+#### 3. PostgreSQL não conecta
+```bash
+# Reinicie os serviços
+docker-compose down && docker-compose up -d
+
+# Verifique logs
+docker-compose logs postgres
+```
+
+#### 4. n8n não carrega
+```bash
+# Verifique se a porta 5678 está disponível
+netstat -an | findstr 5678
+
+# Reinicie o serviço
+docker-compose restart n8n
+```
+
+## 📝 Scripts de Setup
+
+### Windows (PowerShell)
+```powershell
+.\setup.ps1
+```
+
+### Linux/Mac (Bash)
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+## 🔄 Atualizações
+
+Para atualizar o custom node após mudanças:
+
+```bash
+# 1. Rebuild o custom node
+cd n8n-custom-random-node
+npm run build
+
+# 2. Reinicie o n8n
+docker-compose restart n8n
+```
+
+## 📖 Documentação Adicional
+
+- **[Documentação Oficial n8n](https://docs.n8n.io/)**
+- **[Creating Custom Nodes](https://docs.n8n.io/integrations/creating-nodes/)**
+- **[Random.org API Documentation](https://www.random.org/clients/http/)**
+
+## 🤝 Contribuição
 
 1. Fork o projeto
-2. Crie uma branch para sua feature: `git checkout -b feature/nova-feature`
-3. Commit suas mudanças: `git commit -m 'Adiciona nova feature'`
-4. Push para a branch: `git push origin feature/nova-feature`
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
 5. Abra um Pull Request
 
-## 📝 Licença
+## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-## 🔗 Links Úteis
-
-- [Documentação oficial do n8n](https://docs.n8n.io/)
-- [Criando nodes customizados](https://docs.n8n.io/integrations/creating-nodes/)
-- [API do Random.org](https://www.random.org/clients/http/)
-- [Docker Compose para n8n](https://docs.n8n.io/hosting/installation/docker/)
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ## 📞 Suporte
 
-Para problemas ou dúvidas:
+Em caso de dúvidas ou problemas:
 
-1. Verifique a seção de solução de problemas
-2. Consulte os logs dos containers
-3. Abra uma issue no GitHub
-4. Entre em contato com o desenvolvedor
+1. Verifique a seção de Troubleshooting
+2. Consulte os logs: `docker-compose logs`
+3. Abra uma issue no repositório
 
 ---
 
-**Desenvolvido por Rafael** 🚀
+**Desenvolvido para o desafio técnico da Onfly** 🚀
