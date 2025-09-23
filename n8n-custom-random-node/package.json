@@ -1,0 +1,54 @@
+{
+  "name": "n8n-custom-random-node",
+  "version": "1.0.0",
+  "description": "Custom n8n node for generating true random numbers using Random.org API",
+  "license": "MIT",
+  "homepage": "https://github.com/your-username/n8n-custom-random-node",
+  "author": {
+    "name": "Rafael",
+    "email": "your-email@example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/n8n-custom-random-node.git"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix",
+    "prepublishOnly": "npm run build && npm run lint -s"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [],
+    "nodes": [
+      "dist/nodes/Random/Random.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.42.0",
+    "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "gulp": "^4.0.2",
+    "n8n-workflow": "*",
+    "prettier": "^2.7.1",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "nodes",
+    "random",
+    "generator",
+    "random.org"
+  ]
+}
