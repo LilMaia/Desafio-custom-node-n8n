@@ -2,6 +2,7 @@
   "name": "n8n-custom-random-node",
   "version": "1.0.0",
   "description": "Custom n8n node for generating true random numbers using Random.org API",
+  "type": "module",
   "license": "MIT",
   "homepage": "https://github.com/your-username/n8n-custom-random-node",
   "author": {

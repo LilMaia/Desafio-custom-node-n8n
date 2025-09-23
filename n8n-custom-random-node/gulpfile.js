@@ -1,8 +1,21 @@
-const { src, dest } = require('gulp');
+import pkg from 'gulp';
+const { src, dest, parallel } = pkg;
 
 function buildIcons() {
-  return src('resources/*.svg').pipe(dest('dist/icons/'));
+  console.log('Building icons...');
+  return src('resources/*.svg')
+    .pipe(dest('dist/nodes/Random/'));
 }
 
-exports.build = buildIcons;
-exports['build:icons'] = buildIcons;
+function copyToIcons() {
+  console.log('Copying to icons folder...');
+  return src('resources/*.svg')
+    .pipe(dest('dist/icons/'));
+}
+
+// Corrija a função buildAll
+const buildAll = parallel(buildIcons, copyToIcons);
+
+export const build = buildAll;
+export { buildAll as 'build:icons' };
+export default buildAll;
