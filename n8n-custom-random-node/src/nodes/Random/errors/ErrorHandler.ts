@@ -1,11 +1,11 @@
 import { NodeOperationError } from 'n8n-workflow';
 
 export enum ErrorType {
-	VALIDATION_ERROR = 'VALIDATION_ERROR',
-	API_ERROR = 'API_ERROR',
-	NETWORK_ERROR = 'NETWORK_ERROR',
-	PARSING_ERROR = 'PARSING_ERROR',
-	UNKNOWN_ERROR = 'UNKNOWN_ERROR',
+	VALIDATION_ERROR = 'ERRO_VALIDACAO',
+	API_ERROR = 'ERRO_API',
+	NETWORK_ERROR = 'ERRO_REDE',
+	PARSING_ERROR = 'ERRO_PARSING',
+	UNKNOWN_ERROR = 'ERRO_DESCONHECIDO',
 }
 
 export interface IErrorDetails {
@@ -78,10 +78,10 @@ export class ErrorHandler {
 			return error;
 		}
 
-		// Generic error handling
+		// Tratamento genérico de erros
 		return new NodeOperationError(
 			node,
-			error instanceof Error ? error.message : 'Unknown error occurred',
+			error instanceof Error ? error.message : 'Erro desconhecido ocorreu',
 			{ itemIndex }
 		);
 	}

@@ -70,10 +70,10 @@ export class RandomResponseBuilder {
 
 	build(): IRandomResponseData {
 		if (this.responseData.result === undefined) {
-			throw new Error('Result is required');
+			throw new Error('Resultado é obrigatório');
 		}
 		if (this.responseData.min === undefined || this.responseData.max === undefined) {
-			throw new Error('Min and max values are required');
+			throw new Error('Valores mínimo e máximo são obrigatórios');
 		}
 		
 		return { ...this.responseData } as IRandomResponseData;

@@ -36,7 +36,7 @@ const response = RandomResponseBuilder.create()
 ```
 
 **Benefícios:**
-- Construção step-by-step de objetos complexos
+- Construção passo a passo de objetos complexos
 - Interface fluente e legível
 - Validação durante a construção
 
@@ -45,7 +45,7 @@ const response = RandomResponseBuilder.create()
 
 Sistema unificado de tratamento de erros:
 
-- **Tipos de erro específicos** (ValidationError, ApiError, NetworkError, etc.)
+- **Tipos de erro específicos** (ErroValidacao, ErroApi, ErroRede, etc.)
 - **Contexto detalhado** para debugging
 - **Tratamento consistente** em toda a aplicação
 

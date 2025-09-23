@@ -1,12 +1,12 @@
-// Operations
+// Operações
 export * from './operations/BaseRandomOperation';
 export * from './operations/TrueRandomOperation';
 
-// Builders
+// Construtores
 export * from './builders/RandomResponseBuilder';
 
-// Error Handling
+// Tratamento de Erros
 export * from './errors/ErrorHandler';
 
-// Main Node
+// Nó Principal
 export * from './Random.node';

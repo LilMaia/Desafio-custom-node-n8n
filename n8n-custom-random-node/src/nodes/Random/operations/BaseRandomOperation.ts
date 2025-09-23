@@ -2,7 +2,7 @@ import { IExecuteFunctions, INodeExecutionData, NodeOperationError } from 'n8n-w
 
 export abstract class BaseRandomOperation {
 	/**
-	 * Template method that defines the algorithm structure
+	 * Método template que define a estrutura do algoritmo
 	 */
 	async executeOperation(
 		context: IExecuteFunctions,
@@ -11,16 +11,16 @@ export abstract class BaseRandomOperation {
 		max: number
 	): Promise<INodeExecutionData> {
 		try {
-			// Step 1: Validate parameters
+			// Passo 1: Validar parâmetros
 			this.validateParameters(min, max, itemIndex, context);
 
-			// Step 2: Generate random number
+			// Passo 2: Gerar número aleatório
 			const randomNumber = await this.generateRandomNumber(context, itemIndex, min, max);
 
-			// Step 3: Create response data
+			// Passo 3: Criar dados de resposta
 			const responseData = this.createResponseData(randomNumber, min, max);
 
-			// Step 4: Build execution data
+			// Passo 4: Construir dados de execução
 			return this.buildExecutionData(responseData, itemIndex);
 		} catch (error) {
 			return this.handleError(error, itemIndex, context);
@@ -28,7 +28,7 @@ export abstract class BaseRandomOperation {
 	}
 
 	/**
-	 * Validate input parameters - can be overridden by subclasses
+	 * Validar parâmetros de entrada - pode ser sobrescrito por subclasses
 	 */
 	protected validateParameters(
 		min: number,
@@ -39,14 +39,14 @@ export abstract class BaseRandomOperation {
 		if (min > max) {
 			throw new NodeOperationError(
 				context.getNode(),
-				`Minimum value (${min}) cannot be greater than maximum value (${max})`,
+				`Valor mínimo (${min}) não pode ser maior que o valor máximo (${max})`,
 				{ itemIndex }
 			);
 		}
 	}
 
 	/**
-	 * Abstract method - must be implemented by subclasses
+	 * Método abstrato - deve ser implementado pelas subclasses
 	 */
 	protected abstract generateRandomNumber(
 		context: IExecuteFunctions,
@@ -56,7 +56,7 @@ export abstract class BaseRandomOperation {
 	): Promise<number>;
 
 	/**
-	 * Create response data - can be overridden by subclasses
+	 * Criar dados de resposta - pode ser sobrescrito por subclasses
 	 */
 	protected createResponseData(randomNumber: number, min: number, max: number): Record<string, any> {
 		return {
@@ -68,7 +68,7 @@ export abstract class BaseRandomOperation {
 	}
 
 	/**
-	 * Build execution data - can be overridden by subclasses
+	 * Construir dados de execução - pode ser sobrescrito por subclasses
 	 */
 	protected buildExecutionData(responseData: Record<string, any>, itemIndex: number): INodeExecutionData {
 		return {
@@ -80,13 +80,13 @@ export abstract class BaseRandomOperation {
 	}
 
 	/**
-	 * Handle errors - can be overridden by subclasses
+	 * Tratar erros - pode ser sobrescrito por subclasses
 	 */
 	protected handleError(error: any, itemIndex: number, context: IExecuteFunctions): INodeExecutionData {
 		if (context.continueOnFail()) {
 			return {
 				json: {
-					error: error instanceof Error ? error.message : 'Unknown error occurred',
+					error: error instanceof Error ? error.message : 'Erro desconhecido ocorreu',
 				},
 				pairedItem: {
 					item: itemIndex,

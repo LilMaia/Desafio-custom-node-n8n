@@ -16,7 +16,7 @@ export class Random implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Generate true random numbers using Random.org',
+		description: 'Gera números verdadeiramente aleatórios usando Random.org',
 		defaults: {
 			name: 'Random',
 		},
@@ -24,26 +24,26 @@ export class Random implements INodeType {
 		outputs: ['main'],
 		properties: [
 			{
-				displayName: 'Operation',
+				displayName: 'Operação',
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
 				options: [
 					{
-						name: 'True Random Number Generator',
+						name: 'Gerador de Números Verdadeiramente Aleatórios',
 						value: 'generateNumber',
-						description: 'Generate a true random number using Random.org',
-						action: 'Generate a true random number',
+						description: 'Gera um número verdadeiramente aleatório usando Random.org',
+						action: 'Gerar um número verdadeiramente aleatório',
 					},
 				],
 				default: 'generateNumber',
 			},
 			{
-				displayName: 'Minimum Value',
+				displayName: 'Valor Mínimo',
 				name: 'min',
 				type: 'number',
 				default: 1,
-				description: 'The minimum value for the random number (inclusive)',
+				description: 'O valor mínimo para o número aleatório (inclusivo)',
 				displayOptions: {
 					show: {
 						operation: ['generateNumber'],
@@ -55,11 +55,11 @@ export class Random implements INodeType {
 				},
 			},
 			{
-				displayName: 'Maximum Value',
+				displayName: 'Valor Máximo',
 				name: 'max',
 				type: 'number',
 				default: 100,
-				description: 'The maximum value for the random number (inclusive)',
+				description: 'O valor máximo para o número aleatório (inclusivo)',
 				displayOptions: {
 					show: {
 						operation: ['generateNumber'],
@@ -78,13 +78,13 @@ export class Random implements INodeType {
 		const returnData: INodeExecutionData[] = [];
 		const operation = this.getNodeParameter('operation', 0) as string;
 
-		// Factory para operações (Pattern: Factory)
+		// Factory para operações (Padrão: Factory)
 		const getOperation = (operationType: string) => {
 			switch (operationType) {
 				case 'generateNumber':
 					return new TrueRandomOperation();
 				default:
-					throw ErrorHandler.createValidationError(`Unknown operation: ${operationType}`);
+					throw ErrorHandler.createValidationError(`Operação desconhecida: ${operationType}`);
 			}
 		};
 

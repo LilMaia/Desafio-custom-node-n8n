@@ -1,70 +1,71 @@
 # n8n-custom-random-node
 
-A custom n8n node for generating true random numbers using the Random.org API.
+Um nó customizado para n8n que gera números verdadeiramente aleatórios usando a API do Random.org.
 
-## Features
+## Funcionalidades
 
-- Generate true random numbers using Random.org
-- Configurable minimum and maximum values
-- Error handling and validation
-- TypeScript implementation
-- SVG icon
+- Gera números verdadeiramente aleatórios usando Random.org
+- Valores mínimo e máximo configuráveis
+- Tratamento de erros e validação
+- Implementação em TypeScript
+- Ícone SVG personalizado
 
-## Installation
+## Instalação
 
-1. Clone this repository
-2. Run `npm install`
-3. Run `npm run build`
-4. Copy the built node to your n8n custom nodes directory
+1. Clone este repositório
+2. Execute `npm install`
+3. Execute `npm run build`
+4. Copie o nó construído para o diretório de nós customizados do n8n
 
-## Development
+## Desenvolvimento
 
 ```bash
-# Install dependencies
+# Instalar dependências
 npm install
 
-# Build the project
+# Construir o projeto
 npm run build
 
-# Watch for changes
+# Observar mudanças
 npm run dev
 
-# Lint code
+# Verificar código
 npm run lint
 
-# Format code
+# Formatar código
 npm run format
 ```
 
-## Node Description
+## Descrição do Nó
 
-The Random node provides a single operation:
+O nó Random fornece uma única operação:
 
-### True Random Number Generator
+### Gerador de Números Verdadeiramente Aleatórios
 
-**Parameters:**
-- **Minimum Value**: The minimum value for the random number (inclusive)
-- **Maximum Value**: The maximum value for the random number (inclusive)
+**Parâmetros:**
+- **Valor Mínimo**: O valor mínimo para o número aleatório (inclusivo)
+- **Valor Máximo**: O valor máximo para o número aleatório (inclusivo)
 
-**Output:**
+**Saída:**
 ```json
 {
-  "randomNumber": 42,
+  "result": 42,
   "min": 1,
   "max": 100,
-  "source": "Random.org",
-  "timestamp": "2025-09-22T10:30:00.000Z",
-  "apiUrl": "https://www.random.org/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new"
+  "timestamp": "2025-09-23 10:30:00 UTC",
+  "poweredBy": "RANDOM.ORG",
+  "type": "true-random",
+  "source": "Random.org API"
 }
 ```
 
-## API Integration
+## Integração com API
 
-This node uses the Random.org HTTP API:
+Este nó usa a API HTTP do Random.org:
 - Endpoint: `https://www.random.org/integers/`
-- Method: GET
-- Parameters: num, min, max, col, base, format, rnd
+- Método: GET
+- Parâmetros: num, min, max, col, base, format, rnd
 
-## License
+## Licença
 
 MIT

@@ -13,7 +13,7 @@ export class TrueRandomOperation extends BaseRandomOperation {
 		// Validação específica do Random.org
 		if (min < -1000000000 || max > 1000000000) {
 			throw ErrorHandler.createValidationError(
-				`Random.org range limits exceeded: min (${min}) and max (${max}) must be within -1,000,000,000 to 1,000,000,000`,
+				`Limites de faixa do Random.org excedidos: min (${min}) e max (${max}) devem estar entre -1.000.000.000 e 1.000.000.000`,
 				{ min, max, itemIndex }
 			);
 		}
@@ -31,7 +31,7 @@ export class TrueRandomOperation extends BaseRandomOperation {
 
 			if (isNaN(randomNumber)) {
 				throw ErrorHandler.createParsingError(
-					'Invalid response from Random.org API',
+					'Resposta inválida da API do Random.org',
 					null,
 					{ response: response.trim(), itemIndex }
 				);
@@ -40,12 +40,12 @@ export class TrueRandomOperation extends BaseRandomOperation {
 			return randomNumber;
 		} catch (error) {
 			if (error instanceof RandomNodeError) {
-				throw error; // Re-throw our custom errors
+				throw error; // Re-lança nossos erros customizados
 			}
 			
-			// Handle network/API errors
+			// Trata erros de rede/API
 			throw ErrorHandler.createNetworkError(
-				'Failed to fetch random number from Random.org',
+				'Falha ao buscar número aleatório do Random.org',
 				error,
 				{ itemIndex }
 			);
@@ -53,7 +53,7 @@ export class TrueRandomOperation extends BaseRandomOperation {
 	}
 
 	protected createResponseData(randomNumber: number, min: number, max: number): Record<string, any> {
-		// Using Builder Pattern for complex response construction
+		// Usando Builder Pattern para construção de resposta complexa
 		const responseData = RandomResponseBuilder.create()
 			.setResult(randomNumber)
 			.setRange(min, max)
