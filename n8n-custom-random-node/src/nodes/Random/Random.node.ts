@@ -3,8 +3,10 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	NodeOperationError,
 } from 'n8n-workflow';
+import { TrueRandomOperation } from './operations/TrueRandomOperation';
+import { RandomResponseBuilder } from './builders/RandomResponseBuilder';
+import { ErrorHandler } from './errors/ErrorHandler';
 
 export class Random implements INodeType {
 	description: INodeTypeDescription = {
@@ -76,68 +78,36 @@ export class Random implements INodeType {
 		const returnData: INodeExecutionData[] = [];
 		const operation = this.getNodeParameter('operation', 0) as string;
 
+		// Factory para operações (Pattern: Factory)
+		const getOperation = (operationType: string) => {
+			switch (operationType) {
+				case 'generateNumber':
+					return new TrueRandomOperation();
+				default:
+					throw ErrorHandler.createValidationError(`Unknown operation: ${operationType}`);
+			}
+		};
+
 		for (let i = 0; i < items.length; i++) {
 			try {
 				if (operation === 'generateNumber') {
 					const min = this.getNodeParameter('min', i) as number;
 					const max = this.getNodeParameter('max', i) as number;
 
-					// Validate input parameters
-					if (min > max) {
-						throw new NodeOperationError(
-							this.getNode(),
-							`Minimum value (${min}) cannot be greater than maximum value (${max})`,
-							{ itemIndex: i }
-						);
-					}
-
-					// Construct Random.org API URL
-					const randomOrgUrl = `https://www.random.org/integers/?num=1&min=${min}&max=${max}&col=1&base=10&format=plain&rnd=new`;
-
-					// Make request to Random.org
-					const response = await this.helpers.request({
-						method: 'GET',
-						url: randomOrgUrl,
-						timeout: 10000,
-					});
-
-					// Parse the response (Random.org returns plain text number)
-					const randomNumber = parseInt(response.trim(), 10);
-
-					if (isNaN(randomNumber)) {
-						throw new NodeOperationError(
-							this.getNode(),
-							'Invalid response from Random.org API',
-							{ itemIndex: i }
-						);
-					}
-
-					// Create output data
-					const executionData: INodeExecutionData = {
-						json: {
-							// Resultado principal (destaque)
-							result: randomNumber,
-
-							// Informações de contexto
-							min: min,
-							max: max,
-							timestamp: new Date().toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ' UTC'),
-
-							// Fonte
-							poweredBy: 'RANDOM.ORG',
-						},
-						pairedItem: {
-							item: i,
-						},
-					};
-
+					// Usando Template Method Pattern através da operação
+					const randomOperation = getOperation(operation);
+					const executionData = await randomOperation.executeOperation(this, i, min, max);
+					
 					returnData.push(executionData);
 				}
 			} catch (error) {
+				// Usando Error Handler Pattern
+				const handledError = ErrorHandler.handleError(error, this.getNode(), i);
+				
 				if (this.continueOnFail()) {
 					returnData.push({
 						json: {
-							error: error instanceof Error ? error.message : 'Unknown error occurred',
+							error: handledError.message,
 						},
 						pairedItem: {
 							item: i,
@@ -145,7 +115,7 @@ export class Random implements INodeType {
 					});
 					continue;
 				}
-				throw error;
+				throw handledError;
 			}
 		}
 
