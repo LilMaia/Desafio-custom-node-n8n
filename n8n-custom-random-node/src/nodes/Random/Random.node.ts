@@ -5,7 +5,6 @@ import {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 import { TrueRandomOperation } from './operations/TrueRandomOperation';
-import { RandomResponseBuilder } from './builders/RandomResponseBuilder';
 import { ErrorHandler } from './errors/ErrorHandler';
 
 export class Random implements INodeType {
