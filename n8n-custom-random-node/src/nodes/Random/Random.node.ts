@@ -8,7 +8,7 @@ import { nodeDescription } from './config/node-description';
 import { SimpleExecutor } from './executors/SimpleExecutor';
 
 /**
- * Nó Random simplificado para n8n
+ * Nó Random para n8n
  * 
  * Gera números verdadeiramente aleatórios usando a API do Random.org.
  */
