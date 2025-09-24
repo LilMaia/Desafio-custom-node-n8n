@@ -13,7 +13,6 @@ function copyToIcons() {
     .pipe(dest('dist/icons/'));
 }
 
-// Corrija a função buildAll
 const buildAll = parallel(buildIcons, copyToIcons);
 
 export const build = buildAll;
